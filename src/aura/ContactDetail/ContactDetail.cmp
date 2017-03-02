@@ -1,0 +1,50 @@
+<aura:component controller="AccountContactsController" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="accountContacts" type="Object[]" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <lightning:card iconName="custom:custom15" title="Account Contacts">
+        <div class="slds-p-left--medium slds-p-right--medium">
+            <ul class="slds-list--vertical slds-has-dividers--top-space">
+                <aura:iteration items="{!v.accountContacts[0].Contacts}" var="item" indexVar="i">
+                    <li class="slds-list__item" onmouseover="{!c.showDetails}" onmouseout="{!c.showDetails}" data-index="{! i}">
+                        {!item.FirstName}&nbsp;{!item.LastName}
+                        <div id="{! 'details-' + i}" class="pop-over slds-popover slds-popover--panel slds-nubbin--left-top slds-hide" role="dialog">
+                            <div class="slds-popover__header">
+                                <div class="slds-media slds-m-bottom--small slds-media--center">
+                                    <div class="slds-media__figure">
+                                        <span class="slds-icon_container slds-icon-standard-account">
+									          <lightning:icon iconName="standard:account" />
+          									<span class="slds-assistive-text">{! v.accountContacts[0].Name}</span>
+                                        </span>
+                                    </div>
+                                    <div class="slds-media__body">
+                                        <p class="slds-text-heading--medium slds-hyphenate"><a href="javascript:void(0);">{! v.accountContacts[0].Name}</a></p>
+                                    </div>
+                                </div>
+                                <div class="slds-grid slds-wrap slds-grid--pull-padded">
+                                    
+                                    <div class="slds-p-horizontal--small slds-size--1-of-2 slds-p-bottom--x-small">
+                                        <dl>
+                                            <dt>
+                                                <p class="slds-text-title--caps slds-truncate" title="Phone">Phone</p>
+                                            </dt>
+                                            <dd><a href="javascript:void(0);">{! item.Phone}</a></dd>
+                                        </dl>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--1-of-2 slds-p-bottom--x-small">
+                                        <dl>
+                                            <dt>
+                                                <p class="slds-text-title--caps slds-truncate" title="Email">Email</p>
+                                            </dt>
+                                            <dd><a href="javascript:void(0);">{! item.Email}</a></dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </aura:iteration>
+            </ul>
+        </div>
+    </lightning:card>
+</aura:component>
